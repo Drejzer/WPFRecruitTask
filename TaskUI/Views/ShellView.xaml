@@ -40,7 +40,9 @@
                   CanUserResizeRows="False"
                   HeadersVisibility="Column"
                   IsReadOnly="True"
-                  FontSize="18">
+                  FontSize="18"
+                  SelectionMode="Single"
+                  SelectionChanged="DataGrid_SelectionChanged">
 
             <DataGrid.RowStyle>
                 <Style TargetType="DataGridRow" BasedOn="{StaticResource {x:Type DataGridRow}}">
@@ -71,16 +73,16 @@
                     <Setter Property="VerticalContentAlignment" Value="Top"/>
                 </Style>
             </DataGrid.ColumnHeaderStyle>
-            
+
             <DataGrid.Columns>
                 <DataGridTextColumn 
                     Header=" ID "
                     Binding="{Binding ID, Mode=OneWay}"/>
-                
+
                 <DataGridTextColumn 
                     Header=" Imię "
                     Binding="{Binding Name, Mode=OneWay}"/>
-                
+
                 <DataGridTextColumn 
                     Header="Liczba &#x0a;nieukończonych &#x0a;zadań" 
                     Binding="{Binding UnfinishedTasksCount}"/>
@@ -92,7 +94,7 @@
                             Content="+"/>
 
                     </DataGridTemplateColumn.Header>
-                    
+
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Content="-"/>
@@ -100,7 +102,6 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
-
         </DataGrid>
 
         <Border Background="#43A0FF"
@@ -153,17 +154,103 @@
                     Grid.Row="1"
                     Grid.Column="1"
                     Grid.ColumnSpan="2"
-                    TextAlignment="Right"
+                    TextAlignment="Center"
                     FontSize="16"
-                    Text="{Binding Path=DetailDisplay_IdString}"/>
+                    Foreground="Black"
+                    Padding="0,5"
+                    Text="{Binding DetailDisplay.IdString, Mode=OneWay}"/>
 
                 <TextBlock 
                     Grid.Row="2"
                     Grid.Column="1"
                     Grid.ColumnSpan="2"
-                    TextAlignment="Right"
+                    TextAlignment="Center"
                     FontSize="16"
-                    Text="{Binding Path=DetailDisplay_NameString}"/>
+                    Foreground="Black"
+                    Padding="0,5"
+                    Text="{Binding DetailDisplay.NameString, Mode=OneWay}"/>
+
+                <TextBlock 
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    TextAlignment="Center"
+                    FontSize="16"
+                    Foreground="Black"
+                    Padding="0,5"
+                    Text="Lista zadań: "/>
+
+                <DataGrid 
+                    ItemsSource="{Binding DetailDisplay.UnfinishedTasks, Mode=OneWay}"
+                    Grid.Row="4"
+                    Grid.RowSpan="2"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="4"
+                    CanUserAddRows="False"
+                    AutoGenerateColumns="False"
+                    RowBackground="#43A0FF"
+                    CanUserResizeColumns="False"
+                    CanUserReorderColumns="False"
+                    CanUserDeleteRows="False"
+                    CanUserResizeRows="False"
+                    HeadersVisibility="Column"
+                    IsReadOnly="True"
+                    FontSize="18"
+                    SelectionMode="Single"
+                    Margin="0,5,0,0"
+                    SelectionChanged="DataGrid_SelectionChanged">
+
+                    <DataGrid.RowStyle>
+                        <Style TargetType="DataGridRow" BasedOn="{StaticResource {x:Type DataGridRow}}">
+                            <Setter Property="Background" Value="White"/>
+                            <Setter Property="Foreground" Value="Black"/>
+                            <Setter Property="BorderBrush" Value="Black"/>
+                            <Setter Property="BorderThickness" Value="1"/>
+                            <Setter Property="Height" Value="auto"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="Black"/>
+                                    <Setter Property="Foreground" Value="White"/>
+                                    <Setter Property="BorderBrush" Value="Black"/>
+                                    <Setter Property="BorderThickness" Value="1"/>
+                                    <Setter Property="Height" Value="auto"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.RowStyle>
+                    
+                    <DataGrid.ColumnHeaderStyle>
+                        <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
+                            <Setter Property="Foreground" Value="Black"/>
+                            <Setter Property="Background" Value="White"/>
+                            <Setter Property="BorderBrush" Value="Black"/>
+                            <Setter Property="SeparatorBrush" Value="Black"/>
+                            <Setter Property="BorderThickness" Value="1"/>
+                            <Setter Property="FontSize" Value="20"/>
+                            <Setter Property="VerticalContentAlignment" Value="Top"/>
+                        </Style>
+                    </DataGrid.ColumnHeaderStyle>
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn 
+                            Header=" ID "
+                            Binding="{Binding WorkTaskID, Mode=OneWay}"
+                            Width="auto"
+                            MinWidth="50"/>
+
+                        <DataGridTextColumn 
+                            Header=" Typ Zadania "
+                            Binding="{Binding WorkTaskType, Mode=OneWay}"
+                            Width="auto"/>
+
+                        <DataGridTextColumn 
+                            Header="Opis zadania" 
+                            Binding="{Binding UnfinishedTasksCount}"
+                            Width="*"/>
+                            
+                        </DataGrid.Columns>
+                </DataGrid>
+                    
 
             </Grid>
         </Border>

@@ -12,9 +12,22 @@ namespace TaskUI.ViewModels
     {
     public class ShellViewModel:Screen
         {
-        public DetailDisplayModel DetailDisplay=new DetailDisplayModel();
+        private DetailDisplayModel _detailDisplay;
+        public DetailDisplayModel DetailDisplay
+            {
+            get
+                {
+                return _detailDisplay;
+                }
+            set
+                {
+                _detailDisplay = value;
+                NotifyOfPropertyChange(()=>DetailDisplay);
+                }
+            }
         public ShellViewModel()
             {
+            DetailDisplay = new DetailDisplayModel();
             //test display
             _employees = new BindableCollection<EmployeeModel>
                 {

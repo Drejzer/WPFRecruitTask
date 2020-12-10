@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TaskUI.ViewModels;
 
 namespace TaskUI.Views
     {
@@ -21,6 +22,11 @@ namespace TaskUI.Views
         public ShellView()
             {
             InitializeComponent();
+            }
+
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+            {
+            
             }
         }
     }
