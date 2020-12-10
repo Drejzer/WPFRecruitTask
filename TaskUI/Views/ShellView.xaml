@@ -8,30 +8,75 @@
         Title="ShellView" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition MinWidth="50" Width="auto"/>
-            <ColumnDefinition MinWidth="50" Width="auto"/>
+            <ColumnDefinition MinWidth="10" Width="auto"/>
+            <ColumnDefinition MinWidth="10" Width="auto"/>
+            <ColumnDefinition MinWidth="10" Width="auto"/>
+            <ColumnDefinition MinWidth="10" Width="auto"/>
+            <ColumnDefinition MinWidth="10" Width="auto"/>
+            <ColumnDefinition MinWidth="10" Width="auto"/>
+            <ColumnDefinition MinWidth="10" Width="auto"/>
             <ColumnDefinition MinWidth="10" Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto" MinHeight="10"/>
-            <RowDefinition MinHeight="10" Height="auto"/>
-            <RowDefinition MinHeight="10" Height="auto"/>
-            <RowDefinition MinHeight="10" Height="auto"/>
-            <RowDefinition MinHeight="10" Height="*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <ItemsControl Background="#43A0FF" Grid.Row="0" Grid.RowSpan="5" Grid.Column="0" Grid.ColumnSpan="2">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="ph1"/>
-                        <TextBlock Text="ph2"/>
-                        <TextBlock Text="ph3"/>
-                        <Button Content="-"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+        <DataGrid ItemsSource="{Binding Employees}"
+                  Background="#43A0FF"
+                  Foreground="White"
+                  Grid.Row="1"
+                  Grid.RowSpan="5"
+                  Grid.Column="0"
+                  Grid.ColumnSpan="4"
+                  CanUserAddRows="False"
+                  AutoGenerateColumns="False"
+                  RowBackground="#43A0FF"
+                  CanUserResizeColumns="False"
+                  CanUserReorderColumns="False"
+                  CanUserDeleteRows="False"
+                  CanUserResizeRows="False">
+            
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow" BasedOn="{StaticResource {x:Type DataGridRow}}">
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="Background" Value="#43A0FF"/>
+                    <Setter Property="BorderBrush" Value="Black"/>
+                    <Setter Property="Height" Value="auto"/>
+                </Style>
+            </DataGrid.RowStyle>
+            
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="Background" Value="#43A0FF"/>
+                    <Setter Property="BorderBrush" Value="Black"/>
+                    <Setter Property="SeparatorBrush" Value="Black"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                </Style>
+            </DataGrid.ColumnHeaderStyle>
+            
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding ID, Mode=OneWay}"/>
+                <DataGridTextColumn Header="Imię" Binding="{Binding Name, Mode=OneWay}"/>
+                <DataGridTextColumn Header="Liczba nieukończonych Zadań" Binding="{Binding UnfinishedTaskCount , Mode=OneWay}"/>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.Header>
+                        <Button Content="+"/>
+                    </DataGridTemplateColumn.Header>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="-"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+
+        </DataGrid>
+
+        <Border Background="#43A0FF" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4">
+            <TextBlock Background="#43A0FF" Foreground="#FFFFFF" Text="Lista pracowników:" MinWidth="50" FontSize="16"/>
+        </Border>
     </Grid>
-    
+
 </Window>
