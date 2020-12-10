@@ -42,7 +42,7 @@
                   IsReadOnly="True"
                   FontSize="18"
                   SelectionMode="Single"
-                  SelectionChanged="DataGrid_SelectionChanged">
+                  SelectedItem="{Binding Path=SelectedEmployee, Mode=TwoWay}">
 
             <DataGrid.RowStyle>
                 <Style TargetType="DataGridRow" BasedOn="{StaticResource {x:Type DataGridRow}}">
@@ -148,7 +148,7 @@
                     FontWeight="Bold"
                     TextAlignment="Center"
                     FontSize="20"
-                    Text="Dane pracownika:"/>
+                    Text="Szczegóły pracownika:"/>
 
                 <TextBlock 
                     Grid.Row="1"
@@ -162,8 +162,8 @@
 
                 <TextBlock 
                     Grid.Row="2"
-                    Grid.Column="1"
-                    Grid.ColumnSpan="2"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="4"
                     TextAlignment="Center"
                     FontSize="16"
                     Foreground="Black"
@@ -197,8 +197,8 @@
                     IsReadOnly="True"
                     FontSize="18"
                     SelectionMode="Single"
-                    Margin="0,5,0,0"
-                    SelectionChanged="DataGrid_SelectionChanged">
+                    Margin="0,5,0,0">
+
 
                     <DataGrid.RowStyle>
                         <Style TargetType="DataGridRow" BasedOn="{StaticResource {x:Type DataGridRow}}">
@@ -251,7 +251,6 @@
                         </DataGrid.Columns>
                 </DataGrid>
                     
-
             </Grid>
         </Border>
         

@@ -10,9 +10,24 @@ using TaskUI.Models;
 
 namespace TaskUI.ViewModels
     {
+
     public class ShellViewModel:Screen
         {
+
+        private EmployeeModel _selectedEmployee;
         private DetailDisplayModel _detailDisplay;
+
+        public EmployeeModel SelectedEmployee
+            {
+            get { return _selectedEmployee; }
+            set 
+                { 
+                _selectedEmployee = value;
+                NotifyOfPropertyChange(() => SelectedEmployee);
+                DetailDisplay = new DetailDisplayModel(SelectedEmployee);
+                }
+            }
+
         public DetailDisplayModel DetailDisplay
             {
             get
