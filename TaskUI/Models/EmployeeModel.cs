@@ -8,6 +8,10 @@ namespace TaskUI.Models
     {
     public class EmployeeModel
         {
+        public EmployeeModel()
+            {
+            UnfinishedTasks = new List<WorkTaskModel>();
+            }
         public string Name { get; set; }
         public string Surname { get; set; }
         public int ID { get; set; }

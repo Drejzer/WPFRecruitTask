@@ -12,17 +12,19 @@
             <ColumnDefinition MinWidth="10" Width="auto"/>
             <ColumnDefinition MinWidth="10" Width="auto"/>
             <ColumnDefinition MinWidth="10" Width="auto"/>
-            <ColumnDefinition MinWidth="10" Width="auto"/>
-            <ColumnDefinition MinWidth="10" Width="auto"/>
-            <ColumnDefinition MinWidth="10" Width="auto"/>
             <ColumnDefinition MinWidth="10" Width="*"/>
         </Grid.ColumnDefinitions>
+        
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto" MinHeight="10"/>
+            <RowDefinition Height="auto" MinHeight="10"/>
+            <RowDefinition Height="auto" MinHeight="10"/>
+            <RowDefinition Height="auto" MinHeight="10"/>
+            <RowDefinition Height="*" MinHeight="10"/>
         </Grid.RowDefinitions>
 
         <DataGrid ItemsSource="{Binding Employees}"
+                  Grid.IsSharedSizeScope="True"
                   Background="#43A0FF"
                   Foreground="White"
                   Grid.Row="1"
@@ -35,17 +37,29 @@
                   CanUserResizeColumns="False"
                   CanUserReorderColumns="False"
                   CanUserDeleteRows="False"
-                  CanUserResizeRows="False">
-            
+                  CanUserResizeRows="False"
+                  HeadersVisibility="Column"
+                  IsReadOnly="True"
+                  FontSize="18">
+
             <DataGrid.RowStyle>
                 <Style TargetType="DataGridRow" BasedOn="{StaticResource {x:Type DataGridRow}}">
-                    <Setter Property="Foreground" Value="White"/>
                     <Setter Property="Background" Value="#43A0FF"/>
-                    <Setter Property="BorderBrush" Value="Black"/>
-                    <Setter Property="Height" Value="auto"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="BorderBrush" Value="Black"/>
+                            <Setter Property="BorderThickness" Value="1"/>
+                            <Setter Property="Height" Value="auto"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="Black"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="BorderBrush" Value="Black"/>
+                            <Setter Property="BorderThickness" Value="1"/>
+                            <Setter Property="Height" Value="auto"/>
+                        </Trigger>
+                    </Style.Triggers>
                 </Style>
             </DataGrid.RowStyle>
-            
             <DataGrid.ColumnHeaderStyle>
                 <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
                     <Setter Property="Foreground" Value="White"/>
@@ -53,17 +67,32 @@
                     <Setter Property="BorderBrush" Value="Black"/>
                     <Setter Property="SeparatorBrush" Value="Black"/>
                     <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="FontSize" Value="24"/>
+                    <Setter Property="VerticalContentAlignment" Value="Top"/>
                 </Style>
             </DataGrid.ColumnHeaderStyle>
             
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding ID, Mode=OneWay}"/>
-                <DataGridTextColumn Header="Imię" Binding="{Binding Name, Mode=OneWay}"/>
-                <DataGridTextColumn Header="Liczba nieukończonych Zadań" Binding="{Binding UnfinishedTaskCount , Mode=OneWay}"/>
+                <DataGridTextColumn 
+                    Header=" ID "
+                    Binding="{Binding ID, Mode=OneWay}"/>
+                
+                <DataGridTextColumn 
+                    Header=" Imię "
+                    Binding="{Binding Name, Mode=OneWay}"/>
+                
+                <DataGridTextColumn 
+                    Header="Liczba &#x0a;nieukończonych &#x0a;zadań" 
+                    Binding="{Binding UnfinishedTasksCount}"/>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.Header>
-                        <Button Content="+"/>
+                        <Button 
+                            VerticalAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Content="+"/>
+
                     </DataGridTemplateColumn.Header>
+                    
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Content="-"/>
@@ -74,9 +103,71 @@
 
         </DataGrid>
 
-        <Border Background="#43A0FF" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4">
-            <TextBlock Background="#43A0FF" Foreground="#FFFFFF" Text="Lista pracowników:" MinWidth="50" FontSize="16"/>
+        <Border Background="#43A0FF"
+                Grid.Row="0"
+                Grid.Column="0"
+                Grid.ColumnSpan="4">
+            
+            <TextBlock Background="#43A0FF"
+                       Foreground="#FFFFFF"
+                       Text="Lista pracowników:"
+                       MinWidth="50"
+                       FontSize="28"
+                       Padding="0,0,75,25"/>
         </Border>
+
+        <Border BorderBrush="Orange" 
+                BorderThickness="2" 
+                Grid.Column="4" 
+                Grid.Row="0"
+                Grid.RowSpan="5"
+                Grid.IsSharedSizeScope="True">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" MinHeight="10"/>
+                    <RowDefinition Height="auto" MinHeight="10"/>
+                    <RowDefinition Height="auto" MinHeight="10"/>
+                    <RowDefinition Height="auto" MinHeight="10"/>
+                    <RowDefinition Height="auto" MinHeight="10"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="25"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock 
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    FontWeight="Bold"
+                    TextAlignment="Center"
+                    FontSize="20"
+                    Text="Dane pracownika:"/>
+
+                <TextBlock 
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    TextAlignment="Right"
+                    FontSize="16"
+                    Text="{Binding Path=DetailDisplay_IdString}"/>
+
+                <TextBlock 
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    TextAlignment="Right"
+                    FontSize="16"
+                    Text="{Binding Path=DetailDisplay_NameString}"/>
+
+            </Grid>
+        </Border>
+        
     </Grid>
 
 </Window>
