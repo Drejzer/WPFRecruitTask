@@ -50,6 +50,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataWorker.cs" />
+    <Compile Include="Models\Employee.cs" />
+    <Compile Include="Models\RecruitTaskContext.cs" />
+    <Compile Include="Models\WorkTask.cs" />
+    <Compile Include="Models\WorkTaskType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

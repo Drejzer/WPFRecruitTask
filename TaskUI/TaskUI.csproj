@@ -99,7 +99,12 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\TaskDB\TaskDB.csproj">
+      <Project>{8e5f8b78-c8c4-47b8-98eb-1413e87f976f}</Project>
+      <Name>TaskDB</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Page Include="Views\ShellView.xaml">
       <SubType>Designer</SubType>

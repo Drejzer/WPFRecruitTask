@@ -91,13 +91,16 @@
                         <Button 
                             VerticalAlignment="Center"
                             VerticalContentAlignment="Center"
-                            Content="+"/>
+                            Content="+"
+                            x:Name="AddEmployee"/>
 
                     </DataGridTemplateColumn.Header>
 
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="-"/>
+                            <Button
+                                x:Name="RemoveEmployee"
+                                Content="-"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -188,7 +191,7 @@
                     Grid.ColumnSpan="4"
                     CanUserAddRows="False"
                     AutoGenerateColumns="False"
-                    RowBackground="#43A0FF"
+                    RowBackground="White"
                     CanUserResizeColumns="False"
                     CanUserReorderColumns="False"
                     CanUserDeleteRows="False"
@@ -207,15 +210,15 @@
                             <Setter Property="BorderBrush" Value="Black"/>
                             <Setter Property="BorderThickness" Value="1"/>
                             <Setter Property="Height" Value="auto"/>
+                            <Setter Property="OverridesDefaultStyle" Value="True"/>
+
+                            <!-- nie jestem pewien jak to zrobić, żeby działało-->
                             <Style.Triggers>
                                 <Trigger Property="IsSelected" Value="True">
                                     <Setter Property="Background" Value="Black"/>
-                                    <Setter Property="Foreground" Value="White"/>
-                                    <Setter Property="BorderBrush" Value="Black"/>
-                                    <Setter Property="BorderThickness" Value="1"/>
-                                    <Setter Property="Height" Value="auto"/>
                                 </Trigger>
                             </Style.Triggers>
+                            
                         </Style>
                     </DataGrid.RowStyle>
                     
@@ -240,15 +243,15 @@
 
                         <DataGridTextColumn 
                             Header=" Typ Zadania "
-                            Binding="{Binding WorkTaskType, Mode=OneWay}"
+                            Binding="{Binding Category, Mode=OneWay}"
                             Width="auto"/>
 
                         <DataGridTextColumn 
-                            Header="Opis zadania" 
-                            Binding="{Binding UnfinishedTasksCount}"
+                            Header=" Opis zadania " 
+                            Binding="{Binding Description,Mode=OneWay}"
                             Width="*"/>
-                            
-                        </DataGrid.Columns>
+                        
+                    </DataGrid.Columns>
                 </DataGrid>
                     
             </Grid>
