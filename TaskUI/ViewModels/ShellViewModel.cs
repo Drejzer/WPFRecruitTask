@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading;
 using Caliburn.Micro;
 using TaskUI.Models;
-using TaskDB.Models;
 using TaskDB;
 using System.Windows.Data;
 
@@ -55,15 +54,16 @@ namespace TaskUI.ViewModels
 
         public ShellViewModel()
             {
-            /*
-             * placeholder data, normally retrived from DB
-             */
             DetailDisplay = new DetailDisplayModel();
             _employees = _getEmployees();
             }
 
         private BindableCollection<EmployeeModel> _getEmployees()
             {
+            /*
+             * Placeholder implementation for testing
+             * normally data is retrieved from the DB
+             */
             var tab=new BindableCollection<EmployeeModel>()
                 {
                 new EmployeeModel()
@@ -74,7 +74,7 @@ namespace TaskUI.ViewModels
                     UnfinishedTasks = new List<WorkTaskModel>()
                         {
                         new WorkTaskModel(){ WorkTaskID = 1, Description="Zadanie 1", Category="Test zadań" },
-                        new WorkTaskModel(){ WorkTaskID=2, Description="Zadanie 2", Category="test zadań"}
+                        new WorkTaskModel(){ WorkTaskID = 2, Description="Zadanie 2", Category="test zadań"}
                         }
                     },
                 new EmployeeModel()
@@ -85,33 +85,43 @@ namespace TaskUI.ViewModels
                     UnfinishedTasks = new List<WorkTaskModel>()
                         {
                         new WorkTaskModel(){ WorkTaskID = 12, Description="Zadanie 12", Category="Test zadań" },
-                        new WorkTaskModel(){ WorkTaskID=3, Description="Zadanie 3", Category="test zadań"}
+                        new WorkTaskModel(){ WorkTaskID = 3, Description="Zadanie 3", Category="test zadań"}
                         }
                     },
                 new EmployeeModel()
                     {
-                    ID = 2,
+                    ID = 224,
                     Name = "Włodzimież",
                     Surname = "Konstantypolitańczykiewicz",
                     UnfinishedTasks = new List<WorkTaskModel>()
                         {
                         new WorkTaskModel(){ WorkTaskID = 123, Description="Zadanie 123", Category="Test zadań" },
-                        new WorkTaskModel(){ WorkTaskID=4, Description="Zadanie 4", Category="test zadań"},
-                        new WorkTaskModel(){ WorkTaskID=5, Description="Zadanie 5", Category="test zadań"}
+                        new WorkTaskModel(){ WorkTaskID = 4, Description="Zadanie 4", Category="test zadań"},
+                        new WorkTaskModel(){ WorkTaskID = 5, Description="Zadanie 5", Category="test zadań"}
                         }
                     }
                 };
             return tab;
             }
 
-        public void RemoveEmployee()
+        public void RemoveEmployee(int id)
             {
+            //Placeholder
             Console.WriteLine("remove button Pressed");
+            //remove_from_database(id)
+
+            Employees = _getEmployees();
             }
 
         public void AddEmployee()
             {
+            //Placeholder 
             Console.WriteLine("Add button Pressed");
+            // dialog do wprowadzenia danych
+
+            // add_to_database
+
+            Employees = _getEmployees();
             }
         }
     }
